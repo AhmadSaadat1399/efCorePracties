@@ -11,6 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using efCorePracties.Models;
+using efCorePracties.Controllers.Models;
+using Microsoft.EntityFrameworkCore.SqlServer;
+using Microsoft.EntityFrameworkCore;
 
 namespace efCorePracties
 {
@@ -27,6 +31,9 @@ namespace efCorePracties
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddDbContext<PersonDbContext>(options => {
+                options.UseSqlServer(Configuration.GetConnectionString("ConnectionStrings"));
+            });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
